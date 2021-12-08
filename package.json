@@ -1,0 +1,29 @@
+{
+  "name": "dzsl-ui",
+  "version": "1.0.0",
+  "description": "docs for dzsl ui",
+  "main": "index.js",
+  "author": "crazycattle",
+  "license": "MIT",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.16"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.12",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vitejs/plugin-vue-jsx": "^1.3.0",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.4",
+    "vitepress": "^0.20.2",
+    "vitepress-theme-demoblock": "^1.4.2",
+    "vue-tsc": "^0.3.0"
+  }
+}
