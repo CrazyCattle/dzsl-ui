@@ -65,7 +65,7 @@ export default defineComponent({
         classCollections += ` dz-${componentsName}--${type}`
       }
       if (props.size) {
-        let size = buttonTypes.indexOf(props.size) > -1 ? props.type : 'medium'
+        let size = buttonSizes.indexOf(props.size) > -1 ? props.size : 'medium'
         classCollections += ` dz-${componentsName}--${size}`
       }
       if (props.round) {
@@ -82,7 +82,12 @@ export default defineComponent({
           disabled={props.disabled}
           type="button"
         >
-          {renderText()}
+          <div class="flex items-center">
+            {
+              props.loading && <div class="is-loading">loading</div>
+            }
+            {renderText()}
+          </div>
         </button>
       );
     };

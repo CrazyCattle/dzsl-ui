@@ -8,11 +8,11 @@ export default defineComponent({
     return () => {
       return (
         <div class=" mt-3 mb-3 ml-5">
-          <DzButton>
+          <DzButton loading>
             <div>按钮 默认</div>
           </DzButton>
           <span class="mr-1"></span>
-          <DzButton type="primary">
+          <DzButton type="primary" loading>
             <div>按钮 primary</div>
           </DzButton>
           <span class="mr-1"></span>
