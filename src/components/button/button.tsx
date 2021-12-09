@@ -1,4 +1,5 @@
 import { defineComponent, CSSProperties } from "vue";
+import "./button.less"
 
 const buttonTypes = [
   "default",
@@ -8,8 +9,15 @@ const buttonTypes = [
   "info",
   "danger",
   "text",
-  "",
 ];
+
+const buttonSizes = [
+  "mini",
+  "small",
+  "medium",
+  "large"
+]
+const componentsName = 'button'
 
 export default defineComponent({
   name: "DzButton",
@@ -19,9 +27,13 @@ export default defineComponent({
     type: {
       type: String,
       values: buttonTypes,
-      default: "",
+      default: "default",
     },
-    size: String,
+    size:  {
+      type: String,
+      values: buttonSizes,
+      default: "medium" 
+    },
     color: String,
     bgColor: String,
     loading: Boolean,
@@ -39,15 +51,37 @@ export default defineComponent({
     const renderStyle = (): CSSProperties => {
       const { color, bgColor } = props;
       const style: CSSProperties = {
-        color: color || "white",
-        backgroundColor: bgColor || "blue",
+        color: color,
+        backgroundColor: bgColor,
       };
       return style;
     };
 
+    const renderClass = (): String => {
+      let classCollections =`dz-${componentsName}` 
+      
+      if (props.type) {
+        let type = buttonTypes.indexOf(props.type) > -1 ? props.type : 'default'
+        classCollections += ` dz-${componentsName}--${type}`
+      }
+      if (props.size) {
+        let size = buttonTypes.indexOf(props.size) > -1 ? props.type : 'medium'
+        classCollections += ` dz-${componentsName}--${size}`
+      }
+      if (props.round) {
+        classCollections += ' is-round'
+      }
+      return classCollections
+    }
+
     return () => {
       return (
-        <button style={renderStyle()} disabled={props.disabled} type="button">
+        <button
+          class={renderClass()}
+          style={renderStyle()}
+          disabled={props.disabled}
+          type="button"
+        >
           {renderText()}
         </button>
       );
