@@ -13,25 +13,44 @@
   cursor: pointer;
   font-size: 14px;
   color: #fff;
-  border-radius: 3px;
+  border-radius: 5px;
   background-color: white;
   border: 1px solid #dcdfe6;
 
   &.dz-button--mini {
     padding: 6px 12px;
+
+    &.is-round {
+      border-radius: 14px;
+    }
   }
 
   &.dz-button--small {
     padding: 8px 14px;
+    &.is-round {
+      border-radius: 16px;
+    }
   }
 
   &.dz-button--medium {
     padding: 10px 16px;
+    &.is-round {
+      border-radius: 18px;
+    }
   }
 
   &.dz-button--large {
     padding: 12px 18px;
+    &.is-round {
+      border-radius: 20px;
+    }
   }
+
+  &.is-circle {
+    padding: 20px;
+    border-radius: 50%;
+  }
+
   &.dz-button--default {
     color: @default-color;
   }

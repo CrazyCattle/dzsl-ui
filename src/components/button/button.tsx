@@ -1,23 +1,18 @@
-import { defineComponent, CSSProperties } from "vue";
-import "./button.less"
+import { defineComponent, CSSProperties, PropType } from "vue";
+import "./button.less";
 
-const buttonTypes = [
-  "default",
-  "primary",
-  "success",
-  "warning",
-  "info",
-  "danger",
-  "text",
-];
+const componentsName = "button";
 
-const buttonSizes = [
-  "mini",
-  "small",
-  "medium",
-  "large"
-]
-const componentsName = 'button'
+export type buttonTypes =
+  | "default"
+  | "primary"
+  | "success"
+  | "warning"
+  | "info"
+  | "danger"
+  | "text";
+
+export type buttonSizes = "mini" | "small" | "medium" | "large";
 
 export default defineComponent({
   name: "DzButton",
@@ -25,20 +20,22 @@ export default defineComponent({
   props: {
     text: String,
     type: {
-      type: String,
-      values: buttonTypes,
-      default: "default",
+      type: String as PropType<buttonTypes>,
+      default: 'default'
     },
-    size:  {
-      type: String,
-      values: buttonSizes,
-      default: "medium" 
+    size: {
+      type: String as PropType<buttonSizes>,
+      default: 'medium'
     },
     color: String,
     bgColor: String,
     loading: Boolean,
     disabled: Boolean,
     round: Boolean,
+    circle: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   setup(props, { slots, emit }) {
@@ -58,21 +55,25 @@ export default defineComponent({
     };
 
     const renderClass = (): String => {
-      let classCollections =`dz-${componentsName}` 
-      
+      let classCollections = `dz-${componentsName}`;
       if (props.type) {
-        let type = buttonTypes.indexOf(props.type) > -1 ? props.type : 'default'
-        classCollections += ` dz-${componentsName}--${type}`
+        let type = props.type;
+        classCollections += ` dz-${componentsName}--${type}`;
       }
-      if (props.size) {
-        let size = buttonSizes.indexOf(props.size) > -1 ? props.size : 'medium'
-        classCollections += ` dz-${componentsName}--${size}`
+
+      if (props.circle) {
+        classCollections += ` is-circle`;
+      } else {
+        if (props.size) {
+          let size = props.size;
+          classCollections += ` dz-${componentsName}--${size}`;
+        }
+        if (props.round) {
+          classCollections += " is-round";
+        }
       }
-      if (props.round) {
-        classCollections += ' is-round'
-      }
-      return classCollections
-    }
+      return classCollections;
+    };
 
     return () => {
       return (
@@ -83,9 +84,10 @@ export default defineComponent({
           type="button"
         >
           <div class="flex items-center">
-            {
-              props.loading && <div class="is-loading">loading</div>
-            }
+            {props.loading && <div class="is-loading"></div>}
+            <div>
+              {/* <img style="width: 16px; height: 16px" src="@/assets/icons/dz-icon--add.svg" alt="" /> */}
+            </div>
             {renderText()}
           </div>
         </button>
